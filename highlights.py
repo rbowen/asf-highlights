@@ -860,7 +860,7 @@ class ApacheHighlights(ApacheAnalysisBase):
         """Post announcement to Mastodon."""
         try:
             url = f"https://boxofclue.com/apache-highlights/{html_filename}"
-            message = f"This week's ASF community highlights: {url}"
+            message = f"This week's ASF community highlights: {url}\n\nCode is at https://github.com/rbowen/asf-highlights"
             
             # Run mastodon_post.py using its virtual environment
             mastodon_command = [
