@@ -620,7 +620,7 @@ class ApacheHighlights(ApacheAnalysisBase):
             report_file = reports_dir / f"apache_highlights_{report_date}.md"
         
         with open(report_file, 'w') as f:
-            f.write(f"# Apache Weekly Highlights - {report_date}\n\n")
+            f.write(f"# ASF Weekly Highlights - {report_date}\n\n")
             if target_project:
                 f.write(f"Project: **{target_project}**\n\n")
             
@@ -807,7 +807,7 @@ class ApacheHighlights(ApacheAnalysisBase):
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Apache Weekly Highlights</title>
+    <title>ASF Weekly Highlights</title>
     <style>
         body {{ font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }}
         h1, h2, h3 {{ color: #333; }}
