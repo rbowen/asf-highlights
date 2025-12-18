@@ -723,7 +723,7 @@ class ApacheHighlights(ApacheAnalysisBase):
             
             # Add summary graph of top 10 projects with most new contributors
             f.write("## Summary\n\n")
-            f.write("Top 10 projects by new contributors:\n\n")
+            f.write("Top 10 projects by new contributors:\n\n<pre>")
             
             # Get projects with new contributors, sorted by count
             projects_with_contributors = []
@@ -739,13 +739,13 @@ class ApacheHighlights(ApacheAnalysisBase):
                 # Find the maximum count for scaling the graph
                 max_count = max(count for _, count in top_projects)
                 
-                f.write("```\n")
+                f.write("\n")
                 for project_name, count in top_projects:
                     # Create a simple bar chart using characters
                     bar_length = max(1, int((count / max_count) * 40))  # Scale to max 40 characters
                     bar = "█" * bar_length
                     f.write(f"{project_name:20} │{bar} {count}\n")
-                f.write("```\n\n")
+                f.write("</pre>\n\n")
             else:
                 f.write("No projects with new contributors found.\n\n")
         
