@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "requests>=2.31.0",
+# ]
+# ///
 import os
 import subprocess
 import requests

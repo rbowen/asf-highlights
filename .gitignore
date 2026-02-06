@@ -143,6 +143,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+mastodon_venv/
+
 
 # Spyder project settings
 .spyderproject
@@ -205,3 +207,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Other stuff
+reports/
+REPOSITORIES/
+mastodon_clientcred.secret
+mastodon_usercred.secret
+

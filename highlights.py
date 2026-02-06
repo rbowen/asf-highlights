@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "markdown>=3.0.0",
+# ]
+# ///
 """
 ASF Highlights - Weekly New Contributor Report
 

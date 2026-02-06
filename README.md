@@ -38,9 +38,14 @@ command-line switch also.
 - **Project Organization**: Organizes results by Apache project
 - **Virtual Environment**: Runs in a Python virtual environment
 
+## Prerequisites
+
+- [uv](https://docs.astral.sh/uv/) - Fast Python package installer and resolver
+  - Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+
 ## Setup
 
-First, you'll need to get the checkout of all repositories. run `run_clone.sh`
+First, you'll need to get the checkout of all repositories. Run `./clone_apache_repos.py`
 to get the initial checkout. This fetches a checkout of every repository under
 github.com/apache/ -- just the metadata. There's roughly 2800 of them, so
 expect this to take a while. It's also possible that you'll run into API rate
@@ -51,15 +56,18 @@ The script also posts to Mastodon, and you'll need to run setup_mastodon.sh once
 
 ## Usage
 
-Run `run_highlights.sh` to set up the venv and run the `highlights.py` script.
+The script uses `uv` for dependency management with inline script metadata. Simply run:
 
-Or you can run `highlights.py` directly with various command line options,
-shown below.
+```bash
+./highlights.py [options]
+```
+
+`uv` will automatically create an isolated environment and install dependencies on first run.
 
 ### Command Line Options
 
 ```bash
-python3 highlights.py --help
+./highlights.py --help
 
 Options:
   --no-update     Skip repository updates (analyze existing data only)
@@ -73,28 +81,28 @@ Options:
 
 ```bash
 # Standard weekly run
-python3 highlights.py
+./highlights.py
 
 # Skip repository updates (faster, uses existing data)
-python3 highlights.py --no-update
+./highlights.py --no-update
 
 # Look back 14 days instead of 7
-python3 highlights.py --days 14
+./highlights.py --days 14
 
 # Use different base directory
-python3 highlights.py --base-dir /path/to/other/repos
+./highlights.py --base-dir /path/to/other/repos
 
 # Analyze only Apache Spark project
-python3 highlights.py --project spark
+./highlights.py --project spark
 
 # Analyze Apache Flink with 30-day lookback, no updates
-python3 highlights.py --project flink --days 30 --no-update
+./highlights.py --project flink --days 30 --no-update
 
 # Generate detailed report for specific contributor
-python3 highlights.py --contributor rbowen@apache.org
+./highlights.py --contributor rbowen@apache.org
 
 # Generate contributor report with custom base directory
-python3 highlights.py --contributor dgruno@apache.org --base-dir /path/to/repos
+./highlights.py --contributor dgruno@apache.org --base-dir /path/to/repos
 ```
 
 ## Output
@@ -197,7 +205,11 @@ Milestones are only reported if the specific milestone commit occurred within th
 
 ## Other scripts
 
-This directory also contains a few helper scripts
+This directory also contains a few helper scripts:
 
-apache_releases.py and run_releases.sh produce a list of all ASF releases in the last week.
+**apache_releases.py** - Lists all ASF releases in the last week
+
+```bash
+./apache_releases.py
+```
 
