@@ -872,7 +872,7 @@ class ApacheHighlights(ApacheAnalysisBase):
             # Run mastodon_post.py using its virtual environment
             mastodon_command = [
                 'bash', '-c',
-                f'cd {Path(__file__).parent} && source mastodon_venv/bin/activate && python3 mastodon_post.py "{message}"'
+                f'cd {Path(__file__).parent} && ./mastodon_post.py "{message}"'
             ]
             
             result = subprocess.run(mastodon_command, capture_output=True, text=True)
