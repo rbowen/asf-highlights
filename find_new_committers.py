@@ -37,7 +37,8 @@ for person_id, person_info in people_data.items():
 
 # Print results
 if new_committers:
-    print(f"Projects that added committers in {last_month_start.strftime('%B %Y')}:\n")
+    total_committers = sum(len(committers) for committers in new_committers.values())
+    print(f"In {last_month_start.strftime('%B, %Y')}, {len(new_committers)} projects added a total of {total_committers} new committers\n")
     for project in sorted(new_committers.keys()):
         print(f"{project.upper()}:")
         for committer in new_committers[project]:
