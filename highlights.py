@@ -632,6 +632,7 @@ class ApacheHighlights(ApacheAnalysisBase):
             
             days_back = (datetime.now(timezone.utc) - self.cutoff_date).days
             f.write(f"Analysis period: past {days_back} days\n\n")
+            f.write(f"Code is here: https://github.com/rbowen/asf-highlights  Patches welcome.\n\n")
             
             if not self.report_data:
                 f.write("No new contributors or milestones found in the specified time period.\n")
