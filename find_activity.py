@@ -49,9 +49,17 @@ def find_committers():
 
 def find_pmc():
     committee_data = httpx.get("https://whimsy.apache.org/public/committee-info.json").json()
+    committees_data = httpx.get("https://projects.apache.org/json/foundation/committees.json").json()
     
     last_month_start, last_month_end = get_date_range()
+    reporting_month = last_month_start.strftime("%Y-%m")
     new_pmc_members = defaultdict(list)
+    new_projects = set()
+    
+    # Identify projects established in the reporting month
+    for committee in committees_data:
+        if committee.get("established") == reporting_month:
+            new_projects.add(committee.get("id", "").lower())
     
     for project_id, project_info in committee_data.get("committees", {}).items():
         if not project_info.get("pmc"):
@@ -73,9 +81,18 @@ def find_pmc():
     
     if new_pmc_members:
         total = sum(len(m) for m in new_pmc_members.values())
-        print(f"In {last_month_start.strftime('%B, %Y')}, {len(new_pmc_members)} projects added a total of {total} new PMC members\n")
+        new_project_members = sum(len(m) for p, m in new_pmc_members.items() if p in new_projects)
+        
+        summary = f"In {last_month_start.strftime('%B, %Y')}, {len(new_pmc_members)} projects added a total of {total} new PMC members"
+        if new_project_members > 0:
+            summary += f". {new_project_members} of those are part of newly-established projects"
+        print(summary + "\n")
+        
         for project in sorted(new_pmc_members.keys()):
-            print(f"{project.upper()}:")
+            project_label = f"{project.upper()}"
+            if project in new_projects:
+                project_label += " 🎉 (New Project)"
+            print(f"{project_label}:")
             for member in new_pmc_members[project]:
                 print(f"  - {member['name']} ({member['id']}) on {member['date']}")
             print()
